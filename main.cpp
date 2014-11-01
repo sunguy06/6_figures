@@ -3,7 +3,7 @@
 
 void BACKGROUND ();
 void CAR (int x, int y, int Zoom);
-void SUN (int x);
+void SUN ();
 void SKY_DIVER (int x, int y, int Zoom,
                 int HandUp, int Legs);
 void PLANE (int x, int y, int Zoom, int Fire, int Krylia);
@@ -92,7 +92,7 @@ int main()
         CAR (xcar, ycar, Zoom_car);
         txSleep (10);
 
-        x -= 4;
+        x -= 10;
         if (GetAsyncKeyState (VK_ESCAPE)) break;
 
     }
@@ -175,7 +175,7 @@ void PLANE (int x, int y, int Zoom, int Fire, int Krylia)
 
 }
 
-void SUN (int x)
+void SUN ()
 {
     txSetColor (TX_YELLOW);
     txSetFillColor (TX_YELLOW);
