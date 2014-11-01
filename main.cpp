@@ -92,7 +92,7 @@ int main()
         CAR (xcar, ycar, Zoom_car);
         txSleep (10);
 
-        x -= 15;
+        x -= 20;
         if (GetAsyncKeyState (VK_ESCAPE)) break;
 
     }
