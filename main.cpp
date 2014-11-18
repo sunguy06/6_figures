@@ -3,7 +3,7 @@
 
 void BACKGROUND ();
 void CAR (int x, int y, int Zoom);
-void SUN ();
+void SUN (int x);
 void SKY_DIVER (int x, int y, int Zoom,
                 int HandUp, int Legs);
 void PLANE (int x, int y, int Zoom, int Fire, int Krylia);
@@ -40,7 +40,7 @@ int main()
         HOUSE();
         BIG_TREE();
         SMALL_TREE();
-        SUN();
+        SUN(5);
         PLANE(x, 80, 1, 255, 1);
 
         if (GetAsyncKeyState (VK_LEFT))
@@ -92,7 +92,7 @@ int main()
         CAR (xcar, ycar, Zoom_car);
         txSleep (10);
 
-        x -= 20;
+        x -= 4;
         if (GetAsyncKeyState (VK_ESCAPE)) break;
 
     }
@@ -175,7 +175,7 @@ void PLANE (int x, int y, int Zoom, int Fire, int Krylia)
 
 }
 
-void SUN ()
+void SUN (int x)
 {
     txSetColor (TX_YELLOW);
     txSetFillColor (TX_YELLOW);
