@@ -180,7 +180,7 @@ void SUN (int x)
     txSetColor (TX_YELLOW);
     txSetFillColor (TX_YELLOW);
     txCircle (700, 100, 50);
-    POINT triangle5 [3] = {{670, 10}, {660, 60}, {610, 70}};
+    POINT triangle5 [3] = {{670, 10},  {660, 60}, {610, 70}};
     txPolygon (triangle5, 3);
 
     POINT triangle6 [3] = {{610, 140}, {640, 120}, {640, 160}};
