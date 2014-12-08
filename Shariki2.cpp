@@ -49,15 +49,13 @@ void Go_Ball ()
     while (!GetAsyncKeyState (VK_ESCAPE))
         {
 
-        Red   = rand () % 255;
-        Blue  = rand () % 255;
-        Green = rand () % 255;
+
 
         Control_Ball (&First_Vx ,&First_Vy);
 
-        Draw_Ball (First_x,  First_y,  RGB (Red, Blue, Green));
-        Draw_Ball (Second_x, Second_y, RGB (Red, Blue, Green));
-        Draw_Ball (Third_x,  Third_y,  RGB (Red, Blue, Green));
+        Draw_Ball (First_x,  First_y,  TX_RED);
+        Draw_Ball (Second_x, Second_y, TX_GREEN);
+        Draw_Ball (Third_x,  Third_y,  TX_BLUE);
 
         Drow_Lines (First_x,  First_y, Second_x, Second_y, Third_x, Third_y, RGB (Red, Blue, Green));
 
@@ -140,9 +138,11 @@ void Move_Ball (double* x, double* y, double* Vx, double* Vy, double* dt)
 
 void Drow_Lines (double x1, double y1, double x2, double y2, double x3, double y3, COLORREF color)
     {
-    txSetColor (color);
+    txSetColor (TX_RED);
     txLine (x1, y1, x2, y2);
+    txSetColor (TX_GREEN);
     txLine (x2, y2, x3, y3);
+    txSetColor (TX_BLUE);
     txLine (x1, y1, x3, y3);
     }
 
@@ -169,6 +169,7 @@ void Control_Ball (double* Vx, double* Vy)
         {
         *Vy += 0.1;
         }
+
     if (GetAsyncKeyState (VK_SPACE))
         {
         *Vx = 0;
@@ -188,4 +189,8 @@ void Control_Ball (double* Vx, double* Vy)
         }
 
     }
+
+
+//=============================================================================
+
 
