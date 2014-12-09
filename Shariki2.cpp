@@ -7,6 +7,9 @@ void Draw_Ball (   double x,      double y,      COLORREF color);
 void Move_Ball (   double* x,     double* y,     double* Vx,        double* Vy, double* dt);
 void Drow_Lines (  double x,      double y,      double x2,         double y2,  double x3, double y3, COLORREF color);
 void Control_Ball (double* Vx, double* Vy);
+void Znach_Balls (int* Znachenie_Balls, double* First_Vx , double* First_Vy,
+                  double* Second_Vx , double* Second_Vy, double* Third_Vx ,
+                  double* Third_Vy);
 
 //=============================================================================
 
@@ -45,13 +48,14 @@ void Go_Ball ()
     double Third_t = 2;
     double Third_x = 800;
     double Third_y = 350;
+    int Znachenie_Balls = 1;
 
     while (!GetAsyncKeyState (VK_ESCAPE))
         {
 
-
-
-        Control_Ball (&First_Vx ,&First_Vy);
+        Znach_Balls (&Znachenie_Balls, &First_Vx , &First_Vy,
+                  &Second_Vx , &Second_Vy, &Third_Vx ,
+                  &Third_Vy);
 
         Draw_Ball (First_x,  First_y,  TX_RED);
         Draw_Ball (Second_x, Second_y, TX_GREEN);
@@ -90,7 +94,6 @@ void Go_Ball ()
 
 //=============================================================================
 
-
 void Draw_Ball (double x, double y, COLORREF color)
     {
     txSetFillColor (color);
@@ -98,12 +101,12 @@ void Draw_Ball (double x, double y, COLORREF color)
     txCircle (x, y, 20);
     }
 
-
 //=============================================================================
 
 
 void Move_Ball (double* x, double* y, double* Vx, double* Vy, double* dt)
     {
+
     *x += *Vx*(*dt);
     *y += *Vy*(*dt);
 
@@ -130,8 +133,7 @@ void Move_Ball (double* x, double* y, double* Vx, double* Vy, double* dt)
         *Vy = -(*Vy);
         *y = 20;
         }
-}
-
+    }
 
 //=============================================================================
 
@@ -187,9 +189,31 @@ void Control_Ball (double* Vx, double* Vy)
         *Vx -= 0.1;
         *Vy -= 0.1;
         }
-
     }
 
+//=============================================================================
+
+void Znach_Balls (int* Znachenie_Balls, double* First_Vx , double* First_Vy,
+                  double* Second_Vx , double* Second_Vy, double* Third_Vx ,
+                  double* Third_Vy)
+    {
+        int ch = 0;
+        if (kbhit()) ch = getch();
+
+        if (ch == '\t')
+            *Znachenie_Balls = *Znachenie_Balls % 3 + 1;
+
+
+        if (*Znachenie_Balls == 1)
+            Control_Ball (First_Vx ,First_Vy);
+
+        if (*Znachenie_Balls == 2)
+            Control_Ball (Second_Vx ,Second_Vy);
+
+        if (*Znachenie_Balls == 3)
+            Control_Ball (Third_Vx ,Third_Vy);
+
+    }
 
 //=============================================================================
 
