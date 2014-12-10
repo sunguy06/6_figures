@@ -12,18 +12,32 @@ int main ()
             {
             txSetFillColor (TX_WHITE);
             txSetColor (TX_WHITE);
-            txCircle (x, y, 10);
+            txCircle (x, y, 1);
             }
 
         if (GetAsyncKeyState (VK_SPACE))
             {
             txSetFillColor (TX_BLACK);
-            txClear ();
             }
 
+            txClear ();
         x = txMouseX();
         y = txMouseY();
-        txSleep(1);
         }
+        txSleep(1);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 
