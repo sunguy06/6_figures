@@ -3,13 +3,27 @@
 //=============================================================================
 
 void Go_Ball ();
-void Draw_Ball (   double x,      double y,      COLORREF color);
-void Move_Ball (   double* x,     double* y,     double* Vx,        double* Vy, double* dt);
-void Drow_Lines (  double x,      double y,      double x2,         double y2,  double x3, double y3, COLORREF color);
+
+
+void Draw_Ball (   double x, double y, COLORREF color);
+
+
+void Move_Ball (   double* x, double* y, double* Vx, double* Vy, double* dt);
+
+
+void Drow_Lines (  double x, double y, double x2, double y2, double x3, double y3, COLORREF color);
+
+
 void Control_Ball (double* Vx, double* Vy);
-void Znach_Balls (int* Znachenie_Balls, double* First_Vx , double* First_Vy,
+
+
+void Perecluchenie_Balls (int* Znachenie_Balls, double* First_Vx , double* First_Vy,
                   double* Second_Vx , double* Second_Vy, double* Third_Vx ,
                   double* Third_Vy);
+
+
+double Distance (double x1, double y1, double x2, double y2);
+
 
 //=============================================================================
 
@@ -53,7 +67,7 @@ void Go_Ball ()
     while (!GetAsyncKeyState (VK_ESCAPE))
         {
 
-        Znach_Balls (&Znachenie_Balls, &First_Vx , &First_Vy,
+        Perecluchenie_Balls (&Znachenie_Balls, &First_Vx , &First_Vy,
                   &Second_Vx , &Second_Vy, &Third_Vx ,
                   &Third_Vy);
 
@@ -61,11 +75,43 @@ void Go_Ball ()
         Draw_Ball (Second_x, Second_y, TX_GREEN);
         Draw_Ball (Third_x,  Third_y,  TX_BLUE);
 
+
+
         Drow_Lines (First_x,  First_y, Second_x, Second_y, Third_x, Third_y, RGB (Red, Blue, Green));
 
         Move_Ball (&First_x,  &First_y,  &First_Vx,  &First_Vy,  &First_t);
         Move_Ball (&Second_x, &Second_y, &Second_Vx, &Second_Vy, &Second_t);
         Move_Ball (&Third_x,  &Third_y,  &Third_Vx,  &Third_Vy,  &Third_t);
+
+        if (Distance (First_x, First_y, Second_x, Second_y)<= 50)
+            {
+            txSetFillColor (TX_YELLOW);
+            txSetColor (TX_YELLOW);
+
+            txCircle (Second_x, Second_y, 150);
+
+            txSetFillColor (TX_RED);
+            txSetColor (TX_RED);
+
+            txCircle (Second_x, Second_y, 75);
+
+            break;
+            }
+
+        if (Distance (First_x, First_y, Third_x, Third_y)<= 50)
+            {
+            txSetFillColor (TX_YELLOW);
+            txSetColor (TX_YELLOW);
+
+            txCircle (Third_x, Third_y, 150);
+
+            txSetFillColor (TX_RED);
+            txSetColor (TX_RED);
+
+            txCircle (Third_x, Third_y, 75);
+
+            break;
+            }
 
         if (abs(First_y - Second_y) <= 40 && abs(First_x - Second_x) <= 40)
             {
@@ -88,6 +134,7 @@ void Go_Ball ()
         txSleep (1);
         txSetFillColor (TX_BLACK);
         txClear ();
+
         }
     }
 
@@ -193,7 +240,7 @@ void Control_Ball (double* Vx, double* Vy)
 
 //=============================================================================
 
-void Znach_Balls (int* Znachenie_Balls, double* First_Vx , double* First_Vy,
+void Perecluchenie_Balls (int* Znachenie_Balls, double* First_Vx , double* First_Vy,
                   double* Second_Vx , double* Second_Vy, double* Third_Vx ,
                   double* Third_Vy)
     {
@@ -217,4 +264,9 @@ void Znach_Balls (int* Znachenie_Balls, double* First_Vx , double* First_Vy,
 
 //=============================================================================
 
+double Distance (double x1, double y1, double x2, double y2)
+    {
+    return sqrt ((x2 - x1)*(x2 - x1) + (y2 - y1)*(y2 - y1));
+    }
 
+//=============================================================================
